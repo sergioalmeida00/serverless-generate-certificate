@@ -87,9 +87,9 @@ export const handler: APIGatewayProxyHandler = async (event) =>{
     await browser.close()
 
     const s3 = new S3()
-    console.log(process.env.BUCKET_NAME)
+    
     s3.putObject({
-      Bucket:process.env.BUCKET_NAME,
+      Bucket:process.env.AWS_S3_BUCKET,
       Key:`${id}.pdf`,
       ACL:process.env.ACL,
       Body:pdf,
@@ -100,7 +100,7 @@ export const handler: APIGatewayProxyHandler = async (event) =>{
       statusCode:201,
       body: JSON.stringify({
         message:"Certificado Criado com Sucesso",
-        url:`https://node-certificate.s3.amazonaws.com/${id}.pdf`
+        url:`${process.env.AWS_S3_BUCKET_URL}${id}.pdf`
       })
     }
 }
