@@ -59,7 +59,7 @@ const serverlessConfiguration: AWS = {
       ]
     }
   },
-  package: { individually: true },
+  package: { individually: false, include:['./src/templates/**'] },
   custom: {
     esbuild: {
       bundle: true,
@@ -102,8 +102,8 @@ const serverlessConfiguration: AWS = {
             }
           ], 
           ProvisionedThroughput:{
-            ReadCapacityUnits:1,
-            WriteCapacityUnits:1
+            ReadCapacityUnits:5,
+            WriteCapacityUnits:5
           }
         } 
       }
